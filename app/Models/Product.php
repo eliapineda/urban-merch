@@ -20,6 +20,20 @@ class Product extends Model
 
     public function mainImage()
     {
-        return $this->hasOne(ProductImage::class)->where('is_main', true);
+        return $this->hasOne(ProductImage::class)->where('is_main', true)
+            ->withDefault([
+                'image_path' => 'images/default-product.png'
+            ]);
+        ;
+    }
+
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    public function cart()
+    {
+        return $this->hasMany(Cart::class);
     }
 }

@@ -1,45 +1,43 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot>
+@extends('layouts.app')
 
-    <div>
-        <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-            @if (Laravel\Fortify\Features::canUpdateProfileInformation())
-                @livewire('profile.update-profile-information-form')
+@section('title', 'Mi Perfil')
 
-                <x-section-border />
-            @endif
-
-            @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updatePasswords()))
-                <div class="mt-10 sm:mt-0">
-                    @livewire('profile.update-password-form')
-                </div>
-
-                <x-section-border />
-            @endif
-
-            @if (Laravel\Fortify\Features::canManageTwoFactorAuthentication())
-                <div class="mt-10 sm:mt-0">
-                    @livewire('profile.two-factor-authentication-form')
-                </div>
-
-                <x-section-border />
-            @endif
-
-            <div class="mt-10 sm:mt-0">
-                @livewire('profile.logout-other-browser-sessions-form')
-            </div>
-
-            @if (Laravel\Jetstream\Jetstream::hasAccountDeletionFeatures())
-                <x-section-border />
-
-                <div class="mt-10 sm:mt-0">
-                    @livewire('profile.delete-user-form')
-                </div>
-            @endif
+@section('content')
+<div class="max-w-4xl mx-auto py-10 px-4">
+    <div class="flex justify-between items-center mb-6">
+        <div>
+            {{-- auth()->user() nos da el objeto del usuario logueado --}}
+            <h2 class="text-4xl font-bold text-[#333]">Bienvenido, {{ auth()->user()->name }}</h2>
+        </div>
+        <div>
+            {{-- En Laravel, el logout suele ser un formulario POST por seguridad --}}
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="btn-glass bg-gray-200 px-4 py-2 rounded">
+                    Cerrar sesión
+                </button>
+            </form>
         </div>
     </div>
-</x-app-layout>
+
+    <div class="text-center">
+        <div class="mb-4">
+            {{-- Jetstream tiene una lógica de fotos de perfil, pero aquí usamos tu estática --}}
+            <img src="{{ asset('images/profile.png') }}" alt="Profile Picture" class="w-32 h-32 rounded-full mx-auto shadow-lg">
+        </div>
+
+        <hr class="my-6 border-t-2 border-gray-300 w-96 mx-auto">
+
+        <div class="w-80 mx-auto text-left">
+            <div class="mb-4">
+                <p class="font-semibold text-gray-600">Nombre de usuario:</p>
+                <p class="p-2 bg-white border rounded shadow-sm">{{ auth()->user()->name }}</p>
+            </div>
+            <div class="mb-4">
+                <p class="font-semibold text-gray-600">Email:</p>
+                <p class="p-2 bg-white border rounded shadow-sm">{{ auth()->user()->email }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

@@ -11,6 +11,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         $users = [
+            ['name' => 'admin', 'email' => 'admin@gmail.com', 'password_hash' => '$2y$10$TvOGt/MzbtjddzUjw5g/.OsR0kQlc7ACiZw8TRHP6xOdCmILufcl2', 'role' => 'admin'],
             ['name' => 'admin', 'email' => 'admin@urbanmerch.com', 'password_hash' => '$2y$10$TvOGt/MzbtjddzUjw5g/.OsR0kQlc7ACiZw8TRHP6xOdCmILufcl2', 'role' => 'admin'],
             ['name' => 'juanperez', 'email' => 'juan@gmail.com', 'password_hash' => '$2y$10$TvOGt/MzbtjddzUjw5g/.OsR0kQlc7ACiZw8TRHP6xOdCmILufcl2', 'role' => 'customer'],
             ['name' => 'maria', 'email' => 'maria@gmail.com', 'password_hash' => '$2y$10$TvOGt/MzbtjddzUjw5g/.OsR0kQlc7ACiZw8TRHP6xOdCmILufcl2', 'role' => 'customer'],

@@ -1,5 +1,4 @@
 @extends('layouts.app') @section('content')
-    <h1>Nuestro Merchandising</h1>
     <div class="min-h-screen bg-gray-50 py-10 px-4">
 
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">

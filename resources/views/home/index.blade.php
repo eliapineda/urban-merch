@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="relative min-h-screen flex flex-col justify-center items-center text-white px-4 bg-cover bg-center"
-     style="background-image: url('{{ asset('images/profile-vinil.jpg') }}');">
+     style="background-image: url('{{ asset('storage/images/profile-vinil.jpg') }}');">
 
     <div class="absolute inset-0 bg-black/30"></div>
 

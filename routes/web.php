@@ -49,19 +49,23 @@ Route::middleware([
     // Nota: Puedes crear un middleware 'role:admin' más adelante para mayor seguridad.
     Route::prefix('admin')->name('admin.')->group(function () {
 
-        // Gestión de Productos
+        // Listado principal de admin
         Route::get('/products', [ProductController::class, 'adminIndex'])->name('products');
-        Route::post('/products/save', [ProductController::class, 'save'])->name('products.save');
-        Route::post('/products/delete/{id}', [ProductController::class, 'destroy'])->name('products.delete');
 
-        // Gestión de Usuarios
-        Route::get('/users', [UserController::class, 'getAll'])->name('users');
-        Route::post('/users/save', [UserController::class, 'saveUser'])->name('users.save');
-        Route::post('/users/delete', [UserController::class, 'deleteUser'])->name('users.delete');
+        // Ruta para mostrar el formulario de creación (LA QUE TE FALTABA)
+        Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
 
-        // Gestión de Reseñas
-        Route::get('/reviews', [ReviewController::class, 'getAll'])->name('reviews');
-        Route::post('/reviews/delete', [ReviewController::class, 'deleteReview'])->name('reviews.delete');
+        // Ruta para procesar el guardado
+        Route::post('/products/store', [ProductController::class, 'store'])->name('products.store');
+
+        // Ruta para mostrar el formulario de edición
+        Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
+
+        // Ruta para procesar la actualización
+        Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
+
+        // Ruta para eliminar
+        Route::delete('/products/delete/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
     });
 
 });

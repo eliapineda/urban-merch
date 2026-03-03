@@ -9,12 +9,32 @@ use Illuminate\Support\Facades\Http;
 class ProductController extends Controller
 {
     /**
+     * show home
+     */
+    public function home()
+    {
+        return view('home.index');
+    }
+
+    /**
      * Display a listing of the resource.
      */
     public function index()
     {
         $products = Product::with('mainImage')->get();
         return view('products.index', compact('products'));
+    }
+
+    /**
+     * Muestra el listado de productos para el administrador.
+     */
+    public function adminIndex()
+    {
+        // Cargamos los productos con su imagen principal
+        $products = Product::with('mainImage')->get();
+
+        // Retornamos la vista de administración (asegúrate de que la ruta del archivo sea correcta)
+        return view('admin.products.index', compact('products'));
     }
 
     /**
@@ -70,7 +90,7 @@ class ProductController extends Controller
     public function edit(string $id)
     {
         $product = Product::findOrFail($id);
-        return view('products.edit', compact('product'));
+        return view('product.edit', compact('product'));
     }
 
     /**
@@ -119,22 +139,23 @@ class ProductController extends Controller
 
         foreach ($request->file('images') as $image) {
             $path = $image->store('uploads/products', 'public');
-            $product->images()->create(['image_path' => $path,'is_main' => false]);
+            $product->images()->create(['image_path' => $path, 'is_main' => false]);
         }
     }
 
-    private function notificacionN8N($product){
+    private function notificacionN8N($product)
+    {
         $url = 'http://mvc_n8n:5678/webhook-test/new-product';
 
         $response = Http::withHeaders([
             'X-Tienda-Token' => 'secret123',
         ])->post($url, [
-            'event' => 'new_merchandasing',
-            'producto' => $product->product_name,
-            'descripcion' => $product->description,
-            'precio' => $product->price,
-            'url_imagen' => $product->mainImage ? asset($product->mainImage->image_path) : null,
-            'url_producto' => route('products.show', $product->id),
-        ]);
+                    'event' => 'new_merchandasing',
+                    'producto' => $product->product_name,
+                    'descripcion' => $product->description,
+                    'precio' => $product->price,
+                    'url_imagen' => $product->mainImage ? asset($product->mainImage->image_path) : null,
+                    'url_producto' => route('products.show', $product->id),
+                ]);
     }
 }

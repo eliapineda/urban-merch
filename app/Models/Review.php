@@ -14,8 +14,6 @@ class Review extends Model
         'content',
     ];
 
-    protected $timestamps = true;
-
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class, 'product_id');

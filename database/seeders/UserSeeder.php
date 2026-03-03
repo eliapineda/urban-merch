@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
             User::create([
                 'name' => $user['name'],
                 'email' => $user['email'],
-                'password' => Hash::make('password123'), // Contraseña por defecto
+                'password' => $user['password_hash'],
                 'role' => $user['role'],
             ]);
         }

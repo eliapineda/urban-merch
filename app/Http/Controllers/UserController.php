@@ -12,7 +12,7 @@ class UserController extends Controller
     {
         $users = User::all();
         $editUser = $request->has('edit') ? User::find($request->edit) : null;
-        return view('admin.users', compact('users', 'editUser'));
+        return view('admin.users.index', compact('users', 'editUser'));
     }
 
     public function saveUser(Request $request)

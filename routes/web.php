@@ -49,23 +49,18 @@ Route::middleware([
     // Nota: Puedes crear un middleware 'role:admin' más adelante para mayor seguridad.
     Route::prefix('admin')->name('admin.')->group(function () {
 
-        // Listado principal de admin
+        Route::get('/', function () {
+            return view('admin.index');
+        })->name('dashboard');
+
         Route::get('/products', [ProductController::class, 'adminIndex'])->name('products');
-
-        // Ruta para mostrar el formulario de creación (LA QUE TE FALTABA)
-        Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
-
-        // Ruta para procesar el guardado
         Route::post('/products/store', [ProductController::class, 'store'])->name('products.store');
-
-        // Ruta para mostrar el formulario de edición
-        Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
-
-        // Ruta para procesar la actualización
         Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
+        Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 
-        // Ruta para eliminar
-        Route::delete('/products/delete/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+        Route::get('/users', [UserController::class, 'getAll'])->name('users');
+        Route::post('/users/save', [UserController::class, 'saveUser'])->name('users.save');
+        Route::delete('/users/delete', [UserController::class, 'deleteUser'])->name('users.delete');
     });
 
 });

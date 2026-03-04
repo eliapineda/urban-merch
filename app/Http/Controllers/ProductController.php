@@ -28,13 +28,20 @@ class ProductController extends Controller
     /**
      * Muestra el listado de productos para el administrador.
      */
-    public function adminIndex()
+    public function adminIndex(Request $request)
     {
-        // Cargamos los productos con su imagen principal
         $products = Product::with('mainImage')->get();
 
-        // Retornamos la vista de administración (asegúrate de que la ruta del archivo sea correcta)
-        return view('admin.products.index', compact('products'));
+        $editProduct = null;
+        if ($request->has('edit')) {
+            $editProduct = Product::with('images')->findOrFail($request->query('edit'));
+        }
+
+        return view('admin.products.index', [
+            'products' => $products,
+            'editProduct' => $editProduct,
+            'productImages' => $editProduct ? $editProduct->images : []
+        ]);
     }
 
     /**

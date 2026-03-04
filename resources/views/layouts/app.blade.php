@@ -46,7 +46,7 @@
             @auth
                 @if(auth()->user()->role === 'admin')
                     <div>
-                        <a href="{{ route('admin.products') }}" class="hover:text-gray-300 transition">
+                        <a href="{{ route('admin.dashboard') }}" class="hover:text-gray-300 transition">
                             <i class="fa-solid fa-screwdriver-wrench"></i>
                         </a>
                     </div>

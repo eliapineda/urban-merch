@@ -23,7 +23,7 @@ class ReviewController extends Controller
     public function getAll()
     {
         $reviews = Review::with(['user', 'product'])->get();
-        return view('admin.reviews', compact('reviews'));
+        return view('admin.reviews.index', compact('reviews'));
     }
 
     public function deleteReview(Request $request)

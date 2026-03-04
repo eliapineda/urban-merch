@@ -39,7 +39,7 @@ Route::middleware([
     Route::post('/cart/delete', [CartController::class, 'deleteProduct'])->name('cart.delete');
 
     // --- RESEÑAS (Públicas pero requieren estar logueado para crear) ---
-    Route::post('/reviews/create', [ReviewController::class, 'create'])->name('reviews.create');
+    Route::post('/reviews/create', [ReviewController::class, 'create'])->name('reviews.store');
 
     /*
     |----------------------------------------------------------------------
@@ -61,6 +61,9 @@ Route::middleware([
         Route::get('/users', [UserController::class, 'getAll'])->name('users');
         Route::post('/users/save', [UserController::class, 'saveUser'])->name('users.save');
         Route::delete('/users/delete', [UserController::class, 'deleteUser'])->name('users.delete');
+
+        Route::get('/reviews', [ReviewController::class, 'getAll'])->name('reviews');
+        Route::delete('/reviews/delete', [UserController::class, 'deleteReview'])->name('reviews.delete');
     });
 
 });

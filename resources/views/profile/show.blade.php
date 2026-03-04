@@ -23,7 +23,7 @@
     <div class="text-center">
         <div class="mb-4">
             {{-- Jetstream tiene una lógica de fotos de perfil, pero aquí usamos tu estática --}}
-            <img src="{{ asset('images/profile.png') }}" alt="Profile Picture" class="w-32 h-32 rounded-full mx-auto shadow-lg">
+            <img src="{{ asset('storage/images/profile.png') }}" alt="Profile Picture" class="w-32 h-32 rounded-full mx-auto shadow-lg">
         </div>
 
         <hr class="my-6 border-t-2 border-gray-300 w-96 mx-auto">

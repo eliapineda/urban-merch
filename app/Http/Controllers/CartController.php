@@ -10,6 +10,10 @@ class CartController extends Controller
 {
     public function index()
     {
+        if (!auth()->check()) {
+            return view('cart.index', ['cartItems' => [], 'total' => 0]);
+        }
+
         $cartItems = Cart::where('user_id', Auth::id())->with('product.mainImage')->get();
         $total = $cartItems->sum(fn($item) => $item->product->price * $item->quantity);
 

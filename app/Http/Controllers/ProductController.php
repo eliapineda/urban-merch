@@ -81,14 +81,15 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        $product = Product::with(['mainImage', 'images', 'reviews.user'])->findOrFail($id);
+        $product = Product::with(['images', 'reviews'])->findOrFail($id);
 
-        $relatedProducts = Product::where('id', '!=', $id)
-            ->take(4)
-            ->with('mainImage')
-            ->get();
-        $relatedContext = $relatedProducts->pluck('product_name')->implode(', ');
-        return view('products.show', compact('product', 'relatedProducts', 'relatedContext'));
+        $images = $product->images;
+
+        $reviews = $product->reviews;
+
+        $relatedProducts = Product::where('id', '!=', $id)->limit(4)->get();
+
+        return view('products.show', compact('product', 'images', 'reviews', 'relatedProducts'));
     }
 
     /**

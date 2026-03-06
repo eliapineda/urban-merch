@@ -16,6 +16,8 @@ Route::get('/', [ProductController::class, 'home'])->name('home');
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('products.show');
 
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+
 /*
 |--------------------------------------------------------------------------
 | Rutas Protegidas (Requieren Login - Middleware 'auth')
@@ -34,7 +36,6 @@ Route::middleware([
     })->name('dashboard');
 
     // --- CARRITO ---
-    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::post('/cart/add', [CartController::class, 'addProduct'])->name('cart.add');
     Route::post('/cart/delete', [CartController::class, 'deleteProduct'])->name('cart.delete');
 

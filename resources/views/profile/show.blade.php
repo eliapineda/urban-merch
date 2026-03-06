@@ -13,7 +13,7 @@
             {{-- En Laravel, el logout suele ser un formulario POST por seguridad --}}
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
-                <button type="submit" class="btn-glass bg-gray-200 px-4 py-2 rounded">
+                <button type="submit" class="btn-glass">
                     Cerrar sesión
                 </button>
             </form>
@@ -31,11 +31,11 @@
         <div class="w-80 mx-auto text-left">
             <div class="mb-4">
                 <p class="font-semibold text-gray-600">Nombre de usuario:</p>
-                <p class="p-2 bg-white border rounded shadow-sm">{{ auth()->user()->name }}</p>
+                <p class="input">{{ auth()->user()->name }}</p>
             </div>
             <div class="mb-4">
                 <p class="font-semibold text-gray-600">Email:</p>
-                <p class="p-2 bg-white border rounded shadow-sm">{{ auth()->user()->email }}</p>
+                <p class="input">{{ auth()->user()->email }}</p>
             </div>
         </div>
     </div>

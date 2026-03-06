@@ -87,7 +87,10 @@ class ProductController extends Controller
 
         $reviews = $product->reviews;
 
-        $relatedProducts = Product::where('id', '!=', $id)->limit(4)->get();
+        $relatedProducts = Product::with('mainImage')->
+            where('id', '!=', $id)
+            ->limit(4)
+            ->get();
 
         return view('products.show', compact('product', 'images', 'reviews', 'relatedProducts'));
     }

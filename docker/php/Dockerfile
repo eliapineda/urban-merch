@@ -1,27 +1,29 @@
-FROM php:8.4-apache
+FROM php:8.4-fpm
 
+# Instalar dependencias del sistema
 RUN apt-get update && apt-get install -y \
     git \
     unzip \
     curl \
     libzip-dev \
- && docker-php-ext-install pdo pdo_mysql zip \
- && docker-php-ext-enable pdo_mysql
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+ && docker-php-ext-install pdo pdo_mysql zip mbstring bcmath gd
 
 # Instalar Node 20 (LTS)
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
  && apt-get install -y nodejs
 
-RUN a2enmod rewrite
-
+# Instalar Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 
-# Apuntar Apache a /public
-RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|g' /etc/apache2/sites-available/000-default.conf \
- && sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s|AllowOverride None|AllowOverride All|' /etc/apache2/apache2.conf
+# Permisos para Laravel
+RUN chown -R www-data:www-data /var/www/html
 
- RUN chown -R www-data:www-data /var/www/html
+# PHP-FPM corre por defecto en el puerto 9000
+EXPOSE 9000
 
-EXPOSE 80
+CMD ["php-fpm"]

@@ -88,8 +88,9 @@
         @foreach ($relatedProducts as $related)
             <div class="overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col group">
                 <a href="/product/{{ $related->id }}" class="flex-1 flex flex-col">
-                    <img src="{{ asset($related->image_path ?? 'storage/images/no-image.jpg') }}"
-                        class="w-full h-80 object-cover group-hover:scale-105 transition-transform">
+                    <img src="{{ $related->mainImage ? asset('storage/' . $related->mainImage->image_path) : asset('images/no-image.jpg') }}"
+                        class="w-full h-80 object-cover group-hover:scale-105 transition-transform"
+                        alt="{{ $related->product_name }}">
                     <div class="p-4 flex justify-between items-center">
                         <h2 class="text-sm font-semibold text-gray-800">{{ $related->product_name }}</h2>
                         <p class="font-bold">{{ number_format($related->price, 2) }} €</p>

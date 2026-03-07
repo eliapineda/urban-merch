@@ -17,7 +17,7 @@ Route::get('/products', [ProductController::class, 'index'])->name('products.ind
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('products.show');
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-
+Route::view('/checkout', 'checkout.success')->name('checkout.success');
 /*
 |--------------------------------------------------------------------------
 | Rutas Protegidas (Requieren Login - Middleware 'auth')

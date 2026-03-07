@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    {{-- Modales externos --}}
-    @include('layouts.modal-login')
 
     {{-- Modal Añadido con Éxito (Lo ubicamos aquí como pediste) --}}
     <div id="cart-success-modal"
@@ -55,7 +53,7 @@
             <p class="font-bold text-2xl mt-4">{{ number_format($product->price, 2) }} €</p>
 
             <div class="flex items-center mt-8 gap-4">
-                <form id="cart-form" method="POST" action="/cart/addProduct"
+                <form id="cart-form" method="POST" action="/cart/add"
                     class="flex flex-col sm:flex-row items-center gap-3 w-full">
                     @csrf
                     <input type="hidden" name="product_id" value="{{ $product->id }}">

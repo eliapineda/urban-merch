@@ -39,14 +39,14 @@
                                                 @endif
                                                 <div>
                                                     <p class="font-bold text-gray-800">{{ $item->product->product_name }}</p>
-                                                    <p class="text-sm text-gray-500">{{ number_format($item->price, 2) }} €</p>
+                                                    <p class="text-sm text-gray-500">{{ number_format($item->product->price, 2) }} €</p>
                                                 </div>
                                             </td>
                                             <td class="py-4 px-6 text-gray-600">
                                                 x {{ $item->quantity }}
                                             </td>
                                             <td class="py-4 px-6 font-bold text-gray-800">
-                                                {{ number_format($item->price * $item->quantity, 2) }} €
+                                                {{ number_format($item->product->price * $item->quantity, 2) }} €
                                             </td>
                                             <td class="py-4 px-6 text-right">
                                                 <form action="{{ route('cart.delete') }}" method="POST">
